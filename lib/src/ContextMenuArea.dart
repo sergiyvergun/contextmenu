@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'ContextMenu.dart';
@@ -79,13 +80,15 @@ class ContextMenuArea extends StatelessWidget {
                 width,
               )
           : null,
-      onLongPressStart: (details) => showContextMenu(
-        details.globalPosition,
-        context,
-        items,
-        verticalPadding,
-        width,
-      ),
+      onLongPressStart: (details) => !kIsWeb
+          ? showContextMenu(
+              details.globalPosition,
+              context,
+              items,
+              verticalPadding,
+              width,
+            )
+          : null,
       child: child,
     );
   }

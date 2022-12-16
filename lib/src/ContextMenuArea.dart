@@ -45,24 +45,40 @@ class ContextMenuArea extends StatelessWidget {
   /// The width for the [ContextMenu]. 320 by default according to Material Design specs.
   final double width;
 
+  final bool showOnPress;
+
   const ContextMenuArea({
     Key? key,
     required this.child,
     required this.items,
     this.verticalPadding = 8,
     this.width = 320,
+    this.showOnPress = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onSecondaryTapDown: (details) => showContextMenu(
-        details.globalPosition,
-        context,
-        items,
-        verticalPadding,
-        width,
-      ),
+      onTapDown: showOnPress
+          ? (details) {
+              showContextMenu(
+                details.globalPosition,
+                context,
+                items,
+                verticalPadding,
+                width,
+              );
+            }
+          : null,
+      onSecondaryTapDown: !showOnPress
+          ? (details) => showContextMenu(
+                details.globalPosition,
+                context,
+                items,
+                verticalPadding,
+                width,
+              )
+          : null,
       onLongPressStart: (details) => showContextMenu(
         details.globalPosition,
         context,

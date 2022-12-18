@@ -60,7 +60,7 @@ class ContextMenuArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapUp: showOnPress
+      onTapDown: showOnPress
           ? (details) {
               showContextMenu(
                 details.globalPosition,
